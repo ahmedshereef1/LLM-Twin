@@ -31,6 +31,10 @@ class CrawlerDispatcher:
 
         return self
 
+    def register_substack(self) -> "CrawlerDispatcher":
+        self._crawlers[r"https://[a-zA-Z0-9-]+\.substack\.com/*"] = CustomArticleCrawler
+        return self
+
     def register_linkedin(self) -> "CrawlerDispatcher":
         self.register("https://linkedin.com", LinkedinCrawler)
 
@@ -49,4 +53,4 @@ class CrawlerDispatcher:
         logger.warning(
             f"No crawler found for {url}. Defaulting to CustomArticleCrawler."
         )
-        return CustomArticleCrawler
+        return CustomArticleCrawler()

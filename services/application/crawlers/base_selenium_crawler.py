@@ -26,7 +26,9 @@ class BaseSeleniumCrawler(BaseCrawler, ABC):
         options = webdriver.ChromeOptions()
 
         options.add_argument("--no-sandbox")
-        options.add_argument("--headless=new")
+        options.add_argument("--headless")
+        options.add_argument("--disable-gpu")
+        options.add_argument("--window-size=1920,1080")
         options.add_argument("--disable-dev-shm-usage")
         options.add_argument("--log-level=3")
         options.add_argument("--disable-popup-blocking")
@@ -37,7 +39,8 @@ class BaseSeleniumCrawler(BaseCrawler, ABC):
         options.add_argument(f"--user-data-dir={mkdtemp()}")
         options.add_argument(f"--data-path={mkdtemp()}")
         options.add_argument(f"--disk-cache-dir={mkdtemp()}")
-        options.add_argument("--remote-debugging-port=9226")
+        options.add_argument("--no-first-run")
+        options.add_argument("--no-default-browser-check")
 
         self.set_extra_driver_options(options)
         self.driver = webdriver.Chrome(options=options)

@@ -18,6 +18,10 @@ class UserDocument(NoSQLBaseDocument):
     def user_name(self):
         return f"{self.first_name} {self.last_name}"
 
+    @property
+    def author_user_name(self):
+        return self.user_name
+
 
 # Custom article
 class Document(NoSQLBaseDocument, ABC):

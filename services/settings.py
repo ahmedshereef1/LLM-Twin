@@ -30,6 +30,9 @@ class Settings(BaseSettings):
     LINKEDIN_USERNAME: str | None = None
     LINKEDIN_PASSWORD: str | None = None
 
+    # UV
+    UV_LINK_MODE: str = "copy"
+
     @classmethod
     def load_settings(cls) -> "Settings":
         """

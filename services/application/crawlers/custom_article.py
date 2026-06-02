@@ -27,24 +27,24 @@ class CustomArticleCrawler(BaseCrawler):
         docs = loader.load()
 
         html2text = Html2TextTransformer()
-        docs_transformed = html2text.atransform_documents(docs)
+        docs_transformed = html2text.transform_documents(docs)
         doc_transformed = docs_transformed[0]
 
         content = {
-            "Tilte": doc_transformed.metadata.get("title"),
+            "Title": doc_transformed.metadata.get("title"),
             "Description": doc_transformed.metadata.get("description"),
             "Content": doc_transformed.page_content,
             "language": doc_transformed.metadata.get("language"),
         }
 
         parse_url = urlparse(link)
-        platfrom = parse_url.netloc
+        platform = parse_url.netloc
 
-        user = kwargs["user"]
+        user = kwargs.get("user")
         instance = self.model(
             content=content,
             link=link,
-            platfrom=platfrom,
+            platform=platform,
             author_id=user.id,
             author_user_name=user.author_user_name,
         )

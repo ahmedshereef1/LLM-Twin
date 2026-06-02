@@ -74,6 +74,10 @@ class NoSQLBaseDocument(BaseModel, Generic[T], ABC):
             collection.insert_one(self.to_mongo(**kwargs))
 
             return self
+        except errors.DuplicateKeyError:
+            logger.warning(f"Document already exists, skipping insert: {self.id}")
+
+            return self
         except errors.WriteError:
             logger.exception("Failed to insert document.")
 
