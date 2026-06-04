@@ -1,7 +1,7 @@
 from services.domain.documents import ArticleDocument, UserDocument
 
 if __name__ == "__main__":
-    user = UserDocument.get_or_create(first_name="Paul", last_name="Iusztin")
+    user = UserDocument.get_or_create(first_name="Maxime", last_name="Labonne")
     articles = ArticleDocument.bulk_find(author_id=str(user.id))
 
     print(f"User ID: {user.id}")

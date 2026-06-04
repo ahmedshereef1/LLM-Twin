@@ -39,6 +39,8 @@ dependencies = [
     "tldextract~=5.1.0",
     "itsdangerous~=2.2.0",
     "croniter>=6.0.0",
+    "sentence-transformers>=5.5.1",
+    "pillow>=12.2.0",
 ]
 
 [build-system]
