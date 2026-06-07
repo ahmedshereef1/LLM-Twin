@@ -1,3 +1,19 @@
-from . import base, exceptions, documents
+from . import (
+    base,
+    exceptions,
+    documents,
+    cleaned_documents,
+    chunks,
+    embedded_chunks,
+    queries,
+)
 
-__all__ = ["base", "exceptions", "documents"]
+__all__ = [
+    "base",
+    "exceptions",
+    "documents",
+    "cleaned_documents",
+    "chunks",
+    "embedded_chunks",
+    "queries",
+]

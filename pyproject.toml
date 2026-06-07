@@ -42,6 +42,7 @@ dependencies = [
     "sentence-transformers>=5.5.1",
     "pillow>=12.2.0",
     "qdrant-client>=1.18.0",
+    "langchain-text-splitters>=1.1.2",
 ]
 
 [build-system]
