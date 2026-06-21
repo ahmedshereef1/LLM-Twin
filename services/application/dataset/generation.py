@@ -7,7 +7,10 @@ from langchain_core.exceptions import OutputParserException
 from langchain_core.language_models.fake import FakeListLLM
 from langchain_core.messages import BaseMessage, HumanMessage, SystemMessage
 from langchain_core.prompts import PromptTemplate
-from langchain_anthropic import ChatAnthropic
+
+# from langchain_anthropic import ChatAnthropic
+# from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 
 from services import domain
 from services.domain.dataset import DatasetType, TrainTestSplit
@@ -92,7 +95,7 @@ Provide your response in JSON format.
             prompt = cls.tokenizer.decode(prompt_tokens)
 
         prompt = GenerateDatasetSamplesPrompt(
-            template=prompt_template,
+            template=prompt_template.template,
             input_variables=input_variables,
             content=prompt,
             num_tokens=len(prompt_tokens),
@@ -128,9 +131,9 @@ Provide your response in JSON format.
                 responses=[constants.get_mocked_response(cls.dataset_type)]
             )
         else:
-            llm = ChatAnthropic(
-                model_name=settings.CLAUDE_MODEL_ID,
-                api_key=settings.CLAUDE_API_KEY,
+            llm = ChatGoogleGenerativeAI(
+                model_name=settings.GEMINI_MODEL,
+                api_key=settings.GOOGLE_API_KEY,
                 max_tokens=2000 if cls.dataset_type == DatasetType.PREFERENCE else 1200,
                 temperature=0.7,
             )

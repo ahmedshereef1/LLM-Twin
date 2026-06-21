@@ -20,6 +20,14 @@ class Settings(BaseSettings):
     CLAUDE_API_KEY: str | None = None
     CLAUDE_MODEL_ID: str = "claude-sonnet-4-6"
 
+    # Groq API
+    GROQ_API_KEY: str | None = None
+    GROQ_MODEL_ID: str = "llama-3.3-70b-versatile"
+
+    # Google API
+    GOOGLE_API_KEY: str | None = None
+    GEMINI_MODEL: str = "gemini-2.5-flash"
+
     # HuggingFace
     HUGGINGFACE_ACCESS_TOKEN: str | None = None
 

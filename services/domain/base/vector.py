@@ -126,7 +126,7 @@ class VectorBaseDocument(BaseModel, Generic[T], ABC):
         collection_name = cls.get_collection_name()
 
         offset = kwargs.pop("offset", None)
-        offset = set(offset) if offset else None
+        # offset = set(offset) if offset else None
 
         records, next_offset = connection.scroll(
             collection_name=collection_name,
@@ -290,7 +290,7 @@ class VectorBaseDocument(BaseModel, Generic[T], ABC):
         if attribute_name in cls.__annotations__:
             return True
 
-        for base in cls.__base__:
+        for base in cls.__bases__:
             if hasattr(base, "_has_class_attribute") and base._has_class_attribute(
                 attribute_name
             ):

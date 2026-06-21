@@ -21,7 +21,9 @@ def query_feature_store() -> Annotated[list, "queried_cleaned_documents"]:
 
     result = fetch_all_data()
 
-    cleaned_documents = [doc for query_result in result for doc in query_result]
+    cleaned_documents = [
+        doc for query_result in result.values() for doc in query_result
+    ]
 
     return cleaned_documents
 
@@ -50,6 +52,8 @@ def fetch_all_data() -> dict[str, list[NoSQLBaseDocument]]:
 
                 results[query_name] = []
 
+    return results
+
 
 def __fetch_articles() -> list[CleanedDocument]:
     return __fetch(CleanedArticleDocument)
@@ -72,7 +76,10 @@ def __fetch(
         return []
 
     while next_offset:
-        documents, next_offset = clean_document_type.bulk_find(limit=limit)
+        documents, next_offset = clean_document_type.bulk_find(
+            limit=limit,
+            offset=next_offset,
+        )
         cleand_document.extend(documents)
 
     return cleand_document

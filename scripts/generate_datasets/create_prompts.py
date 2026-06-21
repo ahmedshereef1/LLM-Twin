@@ -11,7 +11,7 @@ from services.application.dataset import generation
 def create_prompts(
     documents: Annotated[list, "queried_cleaned_documents"],
     document_type: Annotated[DatasetType, "dataset_type"],
-) -> Annotated[dict[DataCategory], list[GenerateDatasetSamplesPrompt], "prompts"]:
+) -> Annotated[dict[DataCategory, list[GenerateDatasetSamplesPrompt]], "prompts"]:
     dataset_generator = generation.get_dataset_generator(document_type)
     grouped_prompts = dataset_generator.get_prompts(documents)
 
