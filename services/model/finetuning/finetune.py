@@ -26,6 +26,19 @@ alpaca_template = """Below is an instruction that describes a task. Write a resp
 {}"""
 
 
+def str_to_bool(value: str | bool) -> bool:
+    if isinstance(value, bool):
+        return value
+
+    normalized_value = value.strip().lower()
+    if normalized_value in {"true", "1", "yes", "y", "on"}:
+        return True
+    if normalized_value in {"false", "0", "no", "n", "off"}:
+        return False
+
+    raise argparse.ArgumentTypeError(f"Invalid boolean value: {value}")
+
+
 def load_model(
     model_name: str,
     max_seq_length: int,
@@ -289,7 +302,7 @@ if __name__ == "__main__":
     )
     parser.add_argument(
         "--is_dummy",
-        type=bool,
+        type=str_to_bool,
         default=False,
         help="Flag to reduce the dataset size for testing",
     )
@@ -338,6 +351,7 @@ if __name__ == "__main__":
             num_train_epochs=args.num_train_epochs,
             per_device_train_batch_size=args.per_device_train_batch_size,
             learning_rate=args.learning_rate,
+            is_dummy=args.is_dummy,
         )
         inference(model, tokenizer)
 
